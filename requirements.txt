@@ -1,0 +1,7 @@
+streamlit
+plotly
+kaleido
+matplotlib
+seaborn
+scipy
+sklearn
