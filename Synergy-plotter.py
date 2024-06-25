@@ -110,7 +110,7 @@ class SynergyPlotter:
                     return None
                 return -np.log((y_target - c) / a) / b
         
-        def plot_curve(df, conc_column, response_column, drug_label):
+        def plot_curve(df, conc_column, response_column, drug_label, column):
             x_data = df[conc_column]
             y_data = df[response_column]
         
@@ -164,16 +164,13 @@ class SynergyPlotter:
 
             scatter_path = f"/tmp/dose-response-scatter-{drug_label}.png"
             plt.savefig(scatter_path, dpi=600, bbox_inches='tight')
-            st.image(scatter_path)  # 展示散点图
             
-            # plt.savefig(f"/tmp/dose-response-scatter-{drug_label}.png", dpi=600, bbox_inches='tight')
-            self.add_download_button(f"dose-response-scatter-{drug_label}.png", f"/tmp/dose-response-scatter-{drug_label}.png")
+            with column:
+                st.image(scatter_path)  # 展示散点图
+                self.add_download_button(f"dose-response-scatter-{drug_label}.png", scatter_path)
         
         df_drug1 = self.df[self.df['Conc2'] == 0]
-        # plot_curve(df_drug1, 'Conc1', 'Response', df_drug1['Drug1'].iloc[0])
         df_drug2 = self.df[self.df['Conc1'] == 0]
-        # plot_curve(df_drug2, 'Conc2', 'Response', df_drug2['Drug2'].iloc[0])
-
         col1, col2 = st.columns(2)
         plot_curve(df_drug1, 'Conc1', 'Response', df_drug1['Drug1'].iloc[0], col1)
         plot_curve(df_drug2, 'Conc2', 'Response', df_drug2['Drug2'].iloc[0], col2)
