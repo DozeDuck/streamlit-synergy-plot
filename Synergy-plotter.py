@@ -52,6 +52,7 @@ class SynergyPlotter:
         plt.ylabel(f'{self.drug1_name} Conc. ({self.unit_label})')
         plt.gca().invert_yaxis()
         plt.savefig("/tmp/response-matrix.png", dpi=600, bbox_inches='tight')
+        st.image("/tmp/response-matrix.png")  # 展示热图
         self.add_download_button('response-matrix.png', "/tmp/response-matrix.png")
       
     def add_download_button(self, download_name, file_path):
