@@ -239,7 +239,7 @@ def save_uploaded_file(uploaded_file):
         return None
 
 # 在第一栏中添加内容
-with plot:
+with plot[0]:
     st.header("Plot figures")
     # Collecting user inputs
     multi_files = st.file_uploader("Upload files", accept_multiple_files=True, type=['xlsx'])
