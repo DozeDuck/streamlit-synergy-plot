@@ -162,7 +162,11 @@ class SynergyPlotter:
             else:
                 plt.text(0.05, 0.95, f'Best R²: {best_r2:.2f}', transform=plt.gca().transAxes, verticalalignment='top')
 
-            plt.savefig(f"/tmp/dose-response-scatter-{drug_label}.png", dpi=600, bbox_inches='tight')
+            scatter_path = f"/tmp/dose-response-scatter-{drug_label}.png"
+            plt.savefig(scatter_path, dpi=600, bbox_inches='tight')
+            st.image(scatter_path)  # 展示散点图
+            
+            # plt.savefig(f"/tmp/dose-response-scatter-{drug_label}.png", dpi=600, bbox_inches='tight')
             self.add_download_button(f"dose-response-scatter-{drug_label}.png", f"/tmp/dose-response-scatter-{drug_label}.png")
         
         df_drug1 = self.df[self.df['Conc2'] == 0]
