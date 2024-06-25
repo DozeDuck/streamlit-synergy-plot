@@ -16,6 +16,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from scipy.optimize import curve_fit
 from sklearn.metrics import r2_score
 # for Streamlit usage, wide screen display
+import mimetypes
 import streamlit as st
 st.set_page_config(layout="wide")
 from tempfile import NamedTemporaryFile
@@ -44,7 +45,7 @@ class synergy_plotter(): # read uploaded files
       
     def matrix_ploter(self, df, drug1_name, drug2_name, unit_label):
         # 创建数据透视表
-        pivot_table = df.pivot("Conc1", "Conc2", "Response")
+        pivot_table = df.pivot(index="Conc1", columns="Conc2", values="Response")
         
         # 定义颜色映射
         colors = [(0, "green"), (0.5, "white"), (1, "red")]
@@ -60,7 +61,7 @@ class synergy_plotter(): # read uploaded files
         plt.gca().invert_yaxis()  # 反转y轴使其从0开始
         # 保存为png文件
         plt.savefig("/tmp/response-matrix.png", dpi=600, bbox_inches='tight')
-        self.streamlit_download_file_plotly(response-matrix.png, "/tmp/response-matrix.png")
+        self.streamlit_download_file_plotly('response-matrix.png', "/tmp/response-matrix.png")
       
     def streamlit_download_file_plotly(self, download_name, content_file):
         # 读取文件内容
@@ -77,7 +78,7 @@ class synergy_plotter(): # read uploaded files
             file_name=download_name,
             mime=mime_type)
 ############################################################################################################################################
-def scatter_curve_ploter(self, df, response_label, unit_label):
+    def scatter_curve_ploter(self, df, response_label, unit_label):
         # 定义非线性回归函数
         def logistic(x, a, b, c, d):
             return a / (1.0 + np.exp(-c * (x - d))) + b
