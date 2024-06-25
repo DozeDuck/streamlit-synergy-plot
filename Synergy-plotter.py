@@ -10,8 +10,8 @@ class synergy_plotter(): # read uploaded files
     def __init__(self, file_path, response_label):
         df = self.xlsx_reader(file_path)
         drug1_name, drug2_name, unit_label = self.label_extracter(df) 
-        self.matrix_ploter()
-        self.scatter_curve_ploter()
+        self.matrix_ploter(df, drug1_name, drug2_name, unit_label)
+        self.scatter_curve_ploter(df, response_label, unit_label)
       
     def xlsx_reader(self, file):
         # 从Excel文件中读取数据
@@ -60,7 +60,7 @@ class synergy_plotter(): # read uploaded files
             file_name=download_name,
             mime=mime_type)
 ############################################################################################################################################
-def scatter_curve_ploter(self, df, conc_column, response_column, drug_label, response_label, unit_label):
+def scatter_curve_ploter(self, df, response_label, unit_label):
         # 定义非线性回归函数
         def logistic(x, a, b, c, d):
             return a / (1.0 + np.exp(-c * (x - d))) + b
@@ -231,9 +231,9 @@ with plot:
     uploaded_filenames = [uploaded_file.name for uploaded_file in multi_files]
     # 保存上传的文件到临时位置
     tmp_path = [save_uploaded_file(multi_files[i]) for i in range(len(multi_files))]
-    output_name = st.text_input("Output file name", 'output.png')
+    # output_name = st.text_input("Output file name", 'output.png')
     response_label = st.selectbox("Type of response", ['Inhibition', 'Activation'])
 
     if st.button('Plotting') and multi_files[0] != 0:
-        x = plotly_go(tmp_path, output_name, renumber, rdf_cutoff, average, plot_name, nbin, size, move_average, mean_value, histogram, xaxis_name, yaxis_name, width_size, height_size, xy_font, title_font, legend_show, legend_font, font_family, font_color, grid_show, uploaded_filenames, margin_l, margin_r, margin_t, margin_b, violin, smooth, error_bar, replica_number, axis_show, line_width, transparency, x_low, x_high, y_low, y_high)
+        x = synergy_plotter(tmp_path[0], response_label)
 
