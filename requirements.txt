@@ -4,4 +4,4 @@ kaleido
 matplotlib
 seaborn
 scipy
-sklearn
+scikit-learn
