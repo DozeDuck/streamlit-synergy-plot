@@ -170,10 +170,13 @@ class SynergyPlotter:
             self.add_download_button(f"dose-response-scatter-{drug_label}.png", f"/tmp/dose-response-scatter-{drug_label}.png")
         
         df_drug1 = self.df[self.df['Conc2'] == 0]
-        plot_curve(df_drug1, 'Conc1', 'Response', df_drug1['Drug1'].iloc[0])
-        
+        # plot_curve(df_drug1, 'Conc1', 'Response', df_drug1['Drug1'].iloc[0])
         df_drug2 = self.df[self.df['Conc1'] == 0]
-        plot_curve(df_drug2, 'Conc2', 'Response', df_drug2['Drug2'].iloc[0])
+        # plot_curve(df_drug2, 'Conc2', 'Response', df_drug2['Drug2'].iloc[0])
+
+        col1, col2 = st.columns(2)
+        plot_curve(df_drug1, 'Conc1', 'Response', df_drug1['Drug1'].iloc[0], col1)
+        plot_curve(df_drug2, 'Conc2', 'Response', df_drug2['Drug2'].iloc[0], col2)
 
 # Streamlit 主程序
 def main():
