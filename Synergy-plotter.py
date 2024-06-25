@@ -32,6 +32,7 @@ class synergy_plotter(): # read uploaded files
     def xlsx_reader(self, file):
         # 从Excel文件中读取数据
         df = pd.read_excel(file)
+        st.text(df)
         return df
       
     def label_extracter(self, df):
