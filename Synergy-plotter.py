@@ -5,6 +5,22 @@ Created on Mon Jun 24 12:04:27 2024
 
 @author: dozeduck
 """
+import getopt
+import argparse
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib.colors import LinearSegmentedColormap
+# for scatter plot's non-linear regression
+from scipy.optimize import curve_fit
+from sklearn.metrics import r2_score
+# for Streamlit usage, wide screen display
+import streamlit as st
+st.set_page_config(layout="wide")
+from tempfile import NamedTemporaryFile
+import base64
+
 
 class synergy_plotter(): # read uploaded files
     def __init__(self, file_path, response_label):
