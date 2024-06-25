@@ -41,7 +41,7 @@ class synergy_plotter(): # read uploaded files
         unit_label = df["ConcUnit"].iloc[0]
         return drug1, drug2, unit_label
       
-    def matrix_ploter(self, df, drug1_name, drug2_name, unit_label)
+    def matrix_ploter(self, df, drug1_name, drug2_name, unit_label):
         # 创建数据透视表
         pivot_table = df.pivot("Conc1", "Conc2", "Response")
         
